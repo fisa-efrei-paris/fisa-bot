@@ -7,15 +7,12 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
 
 const client = new Client()
 
-client.on('ready', () => {
-  console.log(`Bot v${process.env.VERSION} started as ${client.user?.tag}`)
-  client.user?.setUsername("actions")
-  client.user?.setPresence({
-    activity: {
-      name: `v${process.env.VERSION}`,
-      type: "PLAYING"
-    }
-  })
+client.on("ready", () => {
+  if (!client.user) {
+    throw new Error(`An error occurred when starting the bot.`)
+  }
+
+  console.log(`Started as ${client.user.tag}.`)
 })
 
-client.login(process.env.TOKEN)
+client.login(process.env.CLIENT_TOKEN)
