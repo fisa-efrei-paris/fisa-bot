@@ -1,0 +1,33 @@
+{
+  "name": "fisa-efrei-paris-bot",
+  "author": "Cédric <hello@imcedric.space",
+  "description": "A Discord bot to facilitate the management of the server and the life of the server",
+  "private": true,
+  "version": "0.0.0",
+  "main": "dist/src/index.js",
+  "dependencies": {
+    "@types/ws": "^7.2.3",
+    "discord.js": "^12.0.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.14",
+    "@types/node": "^10.14.6",
+    "concurrently": "^4.0.1",
+    "dotenv": "^5.0.1",
+    "jest": "^24.8.0",
+    "jest-junit": "^6.4.0",
+    "nodemon": "^1.19.0",
+    "prettier": "^1.17.1",
+    "ts-jest": "^23.10.4",
+    "typescript": "^3.4.5"
+  },
+  "scripts": {
+    "start": "node dist/src/index.js",
+    "build": "tsc -b .",
+    "watch": "concurrently -k -n \"Typescript,Node\" -p \"[{name}]\" -c \"blue,green\" \"tsc -b . --watch\" \"nodemon dist/src/index.js --inspect\"",
+    "debug": "node inspect dist/src/index.js",
+    "lint": "prettier --list-different '{src,test}/**'",
+    "lint:fix": "prettier --write '{src,test}/**'",
+    "test": "jest --coverage"
+  }
+}
