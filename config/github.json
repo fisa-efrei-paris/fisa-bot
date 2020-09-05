@@ -1,0 +1,9 @@
+{
+  "channels": ["channel_id"],
+  "org": "your_organization",
+  "github": {
+    "id": -1,
+    "privateKey": "your_private_key",
+    "installationId": -1
+  }
+}
