@@ -29,11 +29,6 @@ const invite: ActionCallback = async (
     return
   }
 
-  if (!caller.roles.cache.has(getAdminRoleId())) {
-    await message.react("❌")
-    return
-  }
-
   if (args.length < 2) {
     await message.react("❌")
     return
