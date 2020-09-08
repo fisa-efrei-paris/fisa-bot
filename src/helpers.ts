@@ -1,4 +1,9 @@
-import { Guild, GuildMember, GuildMemberResolvable } from "discord.js"
+import {
+  Guild,
+  GuildMember,
+  GuildMemberResolvable,
+  RoleManager
+} from "discord.js"
 
 export const getGuildMember = (
   guild: Guild | null,
@@ -9,4 +14,14 @@ export const getGuildMember = (
   }
 
   return guild.members.resolve(userId)
+}
+
+export const getRoleFromMention = (roles: RoleManager, mention: string) => {
+  const matches = mention.match(/^<@&(\d+)>$/)
+
+  if (!matches) {
+    return null
+  }
+
+  return roles.cache.get(matches[1])
 }

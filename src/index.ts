@@ -1,5 +1,6 @@
 import { Client } from "discord.js"
 import { handleMessageForGithub } from "./module/github"
+import { handleRegister } from "./module/internal"
 
 if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
   require("dotenv").config({ path: "./.env.local" })
@@ -18,6 +19,7 @@ client.on("ready", () => {
 
 client.on("message", async message => {
   await handleMessageForGithub(message)
+  await handleRegister(message)
 })
 
 client.login(process.env.CLIENT_TOKEN)
