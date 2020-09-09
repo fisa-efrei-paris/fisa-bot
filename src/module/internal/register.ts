@@ -15,6 +15,11 @@ export const register: ActionCallback = async (
     return
   }
 
+  if (!caller.guild.roles.cache.find(role => !config.mods.includes(role.id))) {
+    await message.react("👎")
+    return
+  }
+
   const roleFromMention = getRoleFromMention(caller.guild.roles, args[0])
 
   if (!roleFromMention || !config.roles.includes(roleFromMention.id)) {
@@ -40,7 +45,7 @@ export const register: ActionCallback = async (
     )
 
     if (choice.first()?.emoji.name === "👍") {
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 3; i++) {
         await message.channel.send({
           content: `${args[0]} AAAAAAPPPPPPPPEEEEEELLLLLLLLL !`
         })
