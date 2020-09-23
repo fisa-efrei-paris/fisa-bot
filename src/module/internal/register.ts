@@ -45,7 +45,7 @@ export const register: ActionCallback = async (
     )
 
     if (choice.first()?.emoji.name === "👍") {
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < config.ping; i++) {
         await message.channel.send({
           content: `${args[0]} AAAAAAPPPPPPPPEEEEEELLLLLLLLL !`
         })
