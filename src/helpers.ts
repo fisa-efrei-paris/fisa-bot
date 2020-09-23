@@ -6,10 +6,10 @@ import {
 } from "discord.js"
 
 export const getGuildMember = (
-  guild: Guild | null,
-  userId: GuildMemberResolvable
+  guild: Guild | null | undefined,
+  userId: GuildMemberResolvable | null | undefined
 ): GuildMember | null => {
-  if (!guild) {
+  if (!guild || !userId) {
     return null
   }
 
@@ -24,4 +24,13 @@ export const getRoleFromMention = (roles: RoleManager, mention: string) => {
   }
 
   return roles.cache.get(matches[1])
+}
+
+export const shuffle = <T>(array: T[]): T[] => {
+  const result = [...array]
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[result[i], result[j]] = [result[j], result[i]]
+  }
+  return result
 }

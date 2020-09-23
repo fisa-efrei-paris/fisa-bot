@@ -1,6 +1,6 @@
 import { Client } from "discord.js"
 import { handleMessageForGithub } from "./module/github"
-import { handleRegister } from "./module/internal"
+import { handleInternalCommand } from "./module/internal"
 
 if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
   require("dotenv").config({ path: "./.env.local" })
@@ -9,7 +9,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
 
 const client = new Client()
 
-client.on("ready", () => {
+client.on("ready", async () => {
   if (!client.user) {
     throw new Error(`An error occurred when starting the bot.`)
   }
@@ -19,7 +19,7 @@ client.on("ready", () => {
 
 client.on("message", async message => {
   await handleMessageForGithub(message)
-  await handleRegister(message)
+  await handleInternalCommand(message)
 })
 
 client.login(process.env.CLIENT_TOKEN)
