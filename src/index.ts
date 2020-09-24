@@ -9,7 +9,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
 
 const client = new Client()
 
-client.on("ready", async () => {
+client.on("ready", () => {
   if (!client.user) {
     throw new Error(`An error occurred when starting the bot.`)
   }

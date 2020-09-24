@@ -1,7 +1,7 @@
 import { register } from "./register"
 import { Message } from "discord.js"
 import { getGuildMember } from "../../helpers"
-import { createGroups } from "./groups"
+import { closeGroup, createGroups } from "./groups"
 
 export const handleInternalCommand = async (message: Message) => {
   const guildMember = getGuildMember(message.guild, message.author)
@@ -19,10 +19,16 @@ export const handleInternalCommand = async (message: Message) => {
   }
 
   if (message.content.startsWith("!groups")) {
-    await createGroups(
-      guildMember,
-      message,
-      message.content.replace("!groups ", "").split(" ")
-    )
+    const args = message.content.replace("!groups ", "").split(" ")
+
+    if (args.length === 0) {
+      return
+    }
+
+    if (args[0] === "create") {
+      await createGroups(guildMember, message, args.splice(1))
+    } else if (args[0] === "close") {
+      await closeGroup(guildMember, message, args.splice(1))
+    }
   }
 }

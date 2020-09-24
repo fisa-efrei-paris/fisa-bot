@@ -188,3 +188,80 @@ export const createGroups: ActionCallback = async (
 
   await Promise.all(groups.map(addReactionListener))
 }
+
+export const closeGroup: ActionCallback = async (
+  caller: GuildMember,
+  message: Message,
+  args: string[]
+) => {
+  if (!caller.guild.roles.cache.find(role => !config.mods.includes(role.id))) {
+    await message.react("👎")
+    return
+  }
+
+  const reactionEmoji = caller.guild.emojis.cache.find(
+    emoji => emoji.name === "loading"
+  )
+
+  if (!reactionEmoji) {
+    await message.react("👎")
+    return
+  }
+
+  const channel = message.channel
+
+  if (!(channel instanceof TextChannel)) {
+    await message.react("👎")
+    return
+  }
+
+  if (channel.parent?.name !== channel.name) {
+    await message.react("👎")
+    return
+  }
+
+  const archive = message.guild?.channels.cache.find(
+    channel => channel.id === config.archiveCategoryId
+  )
+
+  if (!archive || !(archive instanceof CategoryChannel)) {
+    await message.react("👎")
+    return
+  }
+
+  await message.react(reactionEmoji)
+
+  await channel.parent.children
+    .find(child => channel.name === child.name && child.type !== "text")
+    ?.delete(`Group closed by ${caller}`)
+  await channel.parent.delete(`Group closed by ${caller}`)
+
+  await channel.edit({ parentID: archive.id }, `Group closed by ${caller}`)
+
+  const permissions: OverwriteData[] = channel.permissionOverwrites
+    .filter(permission => permission.id !== caller.guild.roles.everyone.id)
+    .map(permission => ({
+      id: permission.id,
+      allow: ["VIEW_CHANNEL"],
+      deny: ["SEND_MESSAGES", "ADD_REACTIONS"]
+    }))
+  await channel.overwritePermissions(
+    [
+      {
+        id: caller.guild.roles.everyone,
+        deny: ["VIEW_CHANNEL"]
+      },
+      ...permissions
+    ],
+    `Group closed by ${caller}`
+  )
+
+  await channel.send(
+    new MessageEmbed({
+      description: `${caller} a archivé ce salon !`
+    })
+  )
+
+  await message.reactions.cache.get(reactionEmoji.id)?.remove()
+  await message.react("👍")
+}
