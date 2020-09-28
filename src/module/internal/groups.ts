@@ -22,7 +22,7 @@ type Group = {
   members: GuildMember[]
 }
 
-const groupByN = <T>(data: (T & { id: string })[], n: number): T[][] => {
+const groupByN = <T>(data: T[], n: number): T[][] => {
   const result = []
   for (let i = 0; i < data.length; i += n) {
     result.push(data.slice(i, i + n))
