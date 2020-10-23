@@ -7,7 +7,12 @@ import {
   TextChannel
 } from "discord.js"
 import { ActionCallback } from "../../command"
-import { getGuildMember, getRoleFromMention, shuffle } from "../../helpers"
+import {
+  getGuildMember,
+  getRoleFromMention,
+  shuffle,
+  toKebabCase
+} from "../../helpers"
 import { loadConfiguration } from "../index"
 import { choose } from "moniker"
 
@@ -144,7 +149,7 @@ export const createGroups: ActionCallback = async (
     shuffle(roleFromMention.members.array()),
     personPerGroup
   ).map(members => ({
-    name: `${roleFromMention.name.toLowerCase()}-${choose()}`,
+    name: `${toKebabCase(roleFromMention.name)}-${choose()}`,
     messageEmbed: null,
     category: null,
     channel: null,
