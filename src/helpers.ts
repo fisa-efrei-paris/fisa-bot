@@ -34,3 +34,19 @@ export const shuffle = <T>(array: T[]): T[] => {
   }
   return result
 }
+
+export const toKebabCase = (value: string) => {
+  const matches = value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .match(/[A-Z]{2,}(?=[A-Z][a-z0-9]*|\b)|[A-Z]?[a-z0-9]*|[A-Z]|[0-9]+/g)
+
+  if (!matches) {
+    return value
+  }
+
+  return matches
+    .filter(Boolean)
+    .map(x => x.toLowerCase())
+    .join("-")
+}

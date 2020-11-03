@@ -36,7 +36,7 @@ client.on("messageUpdate", async (oldMessage, newMessage) => {
   }
 
   await handleMessageForGithub(message)
-  await handleRegister(message)
+  await handleInternalCommand(message)
 })
 
 client.login(process.env.CLIENT_TOKEN)

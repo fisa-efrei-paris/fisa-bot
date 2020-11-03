@@ -6,6 +6,7 @@
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "strict": true,
+    "baseUrl": "./src",
     "outDir": "dist",
     "target": "es2016",
     "lib": [
@@ -13,7 +14,10 @@
       "es2016",
       "esnext.asynciterable",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@": ["./"]
+    }
   },
   "include": [
     "src/**/*",
