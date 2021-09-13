@@ -1,4 +1,5 @@
 import { Client } from "discord.js"
+import { initCronTask } from "./module/tpa"
 import { handleMessageForGithub } from "./module/github"
 import { handleInternalCommand } from "./module/internal"
 
@@ -15,6 +16,8 @@ client.on("ready", () => {
   }
 
   console.log(`Started as ${client.user.tag}.`)
+
+  client.guilds.cache.forEach(guild => initCronTask(client, guild))
 })
 
 client.on("message", async message => {

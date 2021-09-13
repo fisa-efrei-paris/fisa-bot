@@ -10,11 +10,13 @@
     "@octokit/rest": "^18.0.5",
     "@types/ws": "^7.2.6",
     "discord.js": "^12.5.3",
-    "moniker": "^0.1.2"
+    "moniker": "^0.1.2",
+    "node-cron": "^3.0.0"
   },
   "devDependencies": {
     "@types/jest": "^23.3.14",
     "@types/node": "^10.17.29",
+    "@types/node-cron": "^2.0.4",
     "concurrently": "^6.2.1",
     "dotenv": "^5.0.1",
     "jest": "^27.1.0",
