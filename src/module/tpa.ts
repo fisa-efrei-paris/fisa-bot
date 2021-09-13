@@ -18,10 +18,10 @@ export function generatedEmbed(role: Role) {
 }
 
 export function initCronTask(client: Client, guild: Guild) {
-  console.log(`Scheduling cron task 'TPA' for guild ${guild.name}.`)
+  console.log(`Scheduling cron task 'TPA' for guild: ${guild.name}`)
 
   schedule(config.cron, () => {
-    console.log(`Running cron task  TPA' for guild ${guild.name}`)
+    console.log(`Running cron task 'TPA' for guild: ${guild.name}`)
     for (const rc of config.channels) {
       const channel = client.channels.cache.get(rc.channel)
       if (!channel || !(channel instanceof TextChannel)) {
