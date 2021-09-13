@@ -1,0 +1,10 @@
+{
+  "cron": "https://www.freeformatter.com/cron-expression-generator-quartz.html",
+  "url": "presence-form-url",
+  "channels": [
+    {
+      "role": "role-id",
+      "channel": "channel-id"
+    }
+  ]
+}
