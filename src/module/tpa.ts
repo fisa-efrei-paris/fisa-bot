@@ -37,5 +37,7 @@ export function initCronTask(client: Client, guild: Guild) {
       }
       channel.send(generatedEmbed(role))
     }
+  }, {
+    timezone: "Europe/Paris"
   })
 }
