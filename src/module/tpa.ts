@@ -37,7 +37,7 @@ export function initCronTask(client: Client, guild: Guild) {
           console.error(`Failed to send TPA notification to role ${rc.role}`)
           continue
         }
-        channel.send({ content: `${role}`, embed: generatedEmbed(role)})
+        channel.send({ content: `${role}`, embed: generatedEmbed(role) })
       }
     },
     {
