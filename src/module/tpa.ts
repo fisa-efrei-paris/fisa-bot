@@ -12,7 +12,7 @@ export function generatedEmbed(role: Role) {
   return new MessageEmbed({
     title: `Rappel fiche présence TPA`,
     color: role.color,
-    description: `<@&${role.id}> n'oubliez pas de remplir la fiche de présence pour le TPA.`,
+    description: `N'oubliez pas de remplir la fiche de présence pour le TPA.`,
     url: config.url
   })
 }
@@ -37,7 +37,7 @@ export function initCronTask(client: Client, guild: Guild) {
           console.error(`Failed to send TPA notification to role ${rc.role}`)
           continue
         }
-        channel.send(generatedEmbed(role))
+        channel.send({ content: `${role}`, embed: generatedEmbed(role)})
       }
     },
     {
